@@ -1,0 +1,15 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+4,1,checkpoint_epoch_001.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_001.pt,143.948154,144.27709,145.096069,-6.451844,-6.450742,False
+4,15,checkpoint_epoch_015.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_015.pt,68.348122,63.003568,63.747231,-0.438385,-0.438172,False
+4,30,checkpoint_epoch_030.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_030.pt,49.634033,38.617404,39.65023,0.443527,0.44361,False
+4,45,checkpoint_epoch_045.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_045.pt,47.425336,36.313849,37.363361,0.505867,0.50594,False
+4,60,checkpoint_epoch_060.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_060.pt,46.359551,35.594757,36.616177,0.525432,0.525502,False
+4,75,checkpoint_epoch_075.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_075.pt,45.593817,35.373763,36.443066,0.529909,0.529978,False
+4,90,checkpoint_epoch_090.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_090.pt,45.289347,33.634657,34.579575,0.576755,0.576818,False
+4,105,checkpoint_epoch_105.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_105.pt,44.633133,34.579092,35.583817,0.551815,0.551881,False
+4,120,checkpoint_epoch_120.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_120.pt,44.369658,34.30263,35.344185,0.557831,0.557896,False
+4,135,checkpoint_epoch_135.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_135.pt,44.567126,33.852603,34.833241,0.570523,0.570586,False
+4,150,checkpoint_epoch_150.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_150.pt,43.895999,33.367978,34.32935,0.582858,0.58292,False
+4,165,checkpoint_epoch_165.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_165.pt,44.615296,33.840311,34.668724,0.57457,0.574633,False
+4,180,checkpoint_epoch_180.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_180.pt,44.430556,33.312989,34.281914,0.58401,0.584072,False
+4,183,checkpoint_epoch_183_final.pt,checkpoints_int_MP/trial_019/fold_4/checkpoint_epoch_183_final.pt,44.09686,33.585316,34.474552,0.579322,0.579384,True

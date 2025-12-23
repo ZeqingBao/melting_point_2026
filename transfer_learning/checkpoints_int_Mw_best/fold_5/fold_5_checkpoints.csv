@@ -1,0 +1,12 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+5,1,checkpoint_epoch_001.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_001.pt,129.329821,108.412755,109.337391,-3.380702,-3.377402,False
+5,15,checkpoint_epoch_015.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_015.pt,38.660683,33.256208,34.013543,0.576054,0.576374,False
+5,30,checkpoint_epoch_030.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_030.pt,36.243004,32.867235,33.530674,0.588006,0.588316,False
+5,45,checkpoint_epoch_045.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_045.pt,35.06899,31.973419,32.543339,0.611912,0.612204,False
+5,60,checkpoint_epoch_060.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_060.pt,34.041899,31.913281,32.440029,0.614372,0.614662,False
+5,75,checkpoint_epoch_075.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_075.pt,33.854662,32.170853,32.605252,0.610434,0.610727,False
+5,90,checkpoint_epoch_090.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_090.pt,32.999776,31.869572,32.33074,0.616966,0.617254,False
+5,105,checkpoint_epoch_105.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_105.pt,32.577047,31.71672,32.283974,0.618073,0.618361,False
+5,120,checkpoint_epoch_120.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_120.pt,32.365444,31.673509,32.152145,0.621186,0.621471,False
+5,135,checkpoint_epoch_135.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_135.pt,32.608664,31.60005,32.169287,0.620782,0.621067,False
+5,145,checkpoint_epoch_145_final.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_int_Mw_best/fold_5/checkpoint_epoch_145_final.pt,32.102216,31.626329,32.081022,0.62286,0.623144,True

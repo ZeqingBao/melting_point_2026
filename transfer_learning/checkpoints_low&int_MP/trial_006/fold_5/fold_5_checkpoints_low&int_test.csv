@@ -1,0 +1,13 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+5,1,checkpoint_epoch_001.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_001.pt,125.907103,126.533656,127.309143,-1.267461,-1.266814,False
+5,15,checkpoint_epoch_015.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_015.pt,69.66152,65.973796,66.488792,0.381531,0.381708,False
+5,30,checkpoint_epoch_030.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_030.pt,55.111093,41.168958,41.758633,0.756043,0.756113,False
+5,45,checkpoint_epoch_045.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_045.pt,54.104996,39.906208,40.5191,0.770311,0.770376,False
+5,60,checkpoint_epoch_060.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_060.pt,53.420143,37.800159,38.465118,0.793007,0.793066,False
+5,75,checkpoint_epoch_075.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_075.pt,52.884258,38.058164,38.704609,0.790422,0.790482,False
+5,90,checkpoint_epoch_090.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_090.pt,52.949246,38.357858,38.967445,0.787566,0.787626,False
+5,105,checkpoint_epoch_105.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_105.pt,52.474886,36.656576,37.368046,0.804646,0.804702,False
+5,120,checkpoint_epoch_120.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_120.pt,52.130632,38.399659,39.020531,0.786987,0.787047,False
+5,135,checkpoint_epoch_135.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_135.pt,52.044889,36.90298,37.615551,0.80205,0.802106,False
+5,150,checkpoint_epoch_150.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_150.pt,52.43964,37.896882,38.596813,0.791588,0.791647,False
+5,155,checkpoint_epoch_155_final.pt,checkpoints_low&int_MP/trial_006/fold_5/checkpoint_epoch_155_final.pt,52.233036,38.234777,38.826435,0.7891,0.789161,True

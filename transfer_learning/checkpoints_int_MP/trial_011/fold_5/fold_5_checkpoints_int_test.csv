@@ -1,0 +1,11 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+5,1,checkpoint_epoch_001.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_001.pt,142.26732,136.091015,137.617081,-5.939864,-5.934636,False
+5,15,checkpoint_epoch_015.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_015.pt,39.181802,33.739846,34.18227,0.571838,0.572161,False
+5,30,checkpoint_epoch_030.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_030.pt,37.237398,32.933039,33.456917,0.589817,0.590126,False
+5,45,checkpoint_epoch_045.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_045.pt,35.906116,33.218511,33.680676,0.584312,0.584625,False
+5,60,checkpoint_epoch_060.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_060.pt,34.699392,32.426156,32.752022,0.606919,0.607215,False
+5,75,checkpoint_epoch_075.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_075.pt,33.916066,32.321078,32.782749,0.606181,0.606477,False
+5,90,checkpoint_epoch_090.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_090.pt,32.918658,32.100078,32.582325,0.610981,0.611274,False
+5,105,checkpoint_epoch_105.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_105.pt,32.74158,32.171753,32.539047,0.612014,0.612306,False
+5,120,checkpoint_epoch_120.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_120.pt,32.379914,32.112993,32.507538,0.612765,0.613057,False
+5,121,checkpoint_epoch_121_final.pt,checkpoints_int_MP/trial_011/fold_5/checkpoint_epoch_121_final.pt,32.339466,32.193,32.45977,0.613902,0.614193,True
