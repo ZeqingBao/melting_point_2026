@@ -1,0 +1,94 @@
+{
+  "scenario": "no_freeze",
+  "freeze_vector": [
+    0,
+    0,
+    0
+  ],
+  "freeze_level": 0,
+  "trial_number": 11,
+  "params": {
+    "learning_rate": 0.0008255424598438478,
+    "weight_decay": 0.0001319123714291476,
+    "batch_size": 16,
+    "dropout_rate": 0.20206059326331807,
+    "hidden_layers": [
+      256,
+      128,
+      64
+    ]
+  },
+  "avg_rmse": 27.700025749206542,
+  "folds": [
+    {
+      "fold": 0,
+      "rmse": 28.750850677490234,
+      "r2": 0.12454718351364136,
+      "q2": 0.12470269203186035,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_0_best.pth"
+    },
+    {
+      "fold": 1,
+      "rmse": 30.37405776977539,
+      "r2": 0.3652604818344116,
+      "q2": 0.3653869032859802,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_1_best.pth"
+    },
+    {
+      "fold": 2,
+      "rmse": 28.440305709838867,
+      "r2": -0.10308682918548584,
+      "q2": -0.09974384307861328,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_2_best.pth"
+    },
+    {
+      "fold": 3,
+      "rmse": 25.740581512451172,
+      "r2": 0.10434466600418091,
+      "q2": 0.11434930562973022,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_3_best.pth"
+    },
+    {
+      "fold": 4,
+      "rmse": 23.79091453552246,
+      "r2": 0.44356876611709595,
+      "q2": 0.44731026887893677,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_4_best.pth"
+    },
+    {
+      "fold": 5,
+      "rmse": 24.189210891723633,
+      "r2": -0.17625832557678223,
+      "q2": -0.1745818853378296,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_5_best.pth"
+    },
+    {
+      "fold": 6,
+      "rmse": 27.968061447143555,
+      "r2": 0.07420343160629272,
+      "q2": 0.07442063093185425,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_6_best.pth"
+    },
+    {
+      "fold": 7,
+      "rmse": 32.10718536376953,
+      "r2": -0.25937938690185547,
+      "q2": -0.25816023349761963,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_7_best.pth"
+    },
+    {
+      "fold": 8,
+      "rmse": 27.934886932373047,
+      "r2": 0.4189760684967041,
+      "q2": 0.4233248233795166,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_8_best.pth"
+    },
+    {
+      "fold": 9,
+      "rmse": 27.70420265197754,
+      "r2": 0.5154032707214355,
+      "q2": 0.5177547931671143,
+      "checkpoint": "artifacts/high_TL_cv/no_freeze/trials/trial_0011/fold_9_best.pth"
+    }
+  ]
+}

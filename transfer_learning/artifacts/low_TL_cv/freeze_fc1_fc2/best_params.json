@@ -1,0 +1,6 @@
+{
+  "learning_rate": 0.0008367297850084652,
+  "weight_decay": 7.865440900409102e-05,
+  "batch_size": 32,
+  "dropout_rate": 0.2736554821155517
+}
