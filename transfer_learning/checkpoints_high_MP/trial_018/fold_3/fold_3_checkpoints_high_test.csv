@@ -1,0 +1,15 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+3,1,checkpoint_epoch_001.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_001.pt,284.837788,286.670062,287.187622,-110.489922,-109.24456,False
+3,15,checkpoint_epoch_015.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_015.pt,277.151351,281.141284,281.663422,-106.24205,-105.044136,False
+3,30,checkpoint_epoch_030.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_030.pt,264.932786,270.491199,271.049408,-98.311859,-97.20252,False
+3,45,checkpoint_epoch_045.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_045.pt,247.058284,250.438791,251.071976,-84.211983,-83.26015,False
+3,60,checkpoint_epoch_060.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_060.pt,221.467293,224.379346,225.228394,-67.572578,-66.80661,False
+3,75,checkpoint_epoch_075.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_075.pt,185.896658,184.910986,185.76828,-45.649529,-45.128445,False
+3,90,checkpoint_epoch_090.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_090.pt,139.494296,139.227344,139.993927,-25.492477,-25.19655,False
+3,105,checkpoint_epoch_105.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_105.pt,90.254664,85.056194,85.78894,-8.948709,-8.837581,False
+3,120,checkpoint_epoch_120.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_120.pt,56.685272,42.952211,43.562027,-1.565195,-1.536541,False
+3,135,checkpoint_epoch_135.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_135.pt,47.010871,31.620537,32.075703,-0.390774,-0.375239,False
+3,150,checkpoint_epoch_150.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_150.pt,45.378534,28.908148,29.462074,-0.173359,-0.160252,False
+3,165,checkpoint_epoch_165.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_165.pt,43.617256,28.665682,29.044464,-0.140331,-0.127593,False
+3,180,checkpoint_epoch_180.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_180.pt,45.809047,28.286081,28.735685,-0.116214,-0.103745,False
+3,193,checkpoint_epoch_193_final.pt,checkpoints_high_MP/trial_018/fold_3/checkpoint_epoch_193_final.pt,42.490206,28.573188,28.896976,-0.128779,-0.116171,True
