@@ -1,0 +1,11 @@
+fold,rmse,r2,q2,checkpoint
+5,22.578344345092773,-0.024810314178466797,-0.023349642753601074,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_5_best.pth
+4,25.09773826599121,0.3807608485221863,0.3849247097969055,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_4_best.pth
+3,27.61123275756836,-0.030565857887268066,-0.019054293632507324,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_3_best.pth
+8,27.963760375976562,0.41777437925338745,0.42213207483291626,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_8_best.pth
+2,28.0373477935791,-0.07205009460449219,-0.06880104541778564,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_2_best.pth
+6,28.478557586669922,0.04009819030761719,0.04032337665557861,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_6_best.pth
+0,30.506345748901367,0.014374971389770508,0.014550089836120605,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_0_best.pth
+7,32.1816520690918,-0.26522791385650635,-0.2640031576156616,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_7_best.pth
+9,32.47211837768555,0.3342512249946594,0.3374817967414856,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_9_best.pth
+1,33.16124725341797,0.24342572689056396,0.24357634782791138,artifacts/high_TL_cv/freeze_fc1/final_fold_models/fold_1_best.pth
