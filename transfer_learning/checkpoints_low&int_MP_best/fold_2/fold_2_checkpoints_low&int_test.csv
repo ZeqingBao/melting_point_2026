@@ -1,0 +1,11 @@
+Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+2,1,checkpoint_epoch_001.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_001.pt,116.391525,103.956761,104.424423,-0.529472,-0.529465,False
+2,15,checkpoint_epoch_015.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_015.pt,39.152053,35.386468,35.71072,0.821131,0.821132,False
+2,30,checkpoint_epoch_030.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_030.pt,36.811801,33.557181,34.002186,0.837837,0.837838,False
+2,45,checkpoint_epoch_045.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_045.pt,35.441681,32.852194,33.2658,0.844785,0.844786,False
+2,60,checkpoint_epoch_060.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_060.pt,34.54773,32.621156,33.021702,0.847055,0.847055,False
+2,75,checkpoint_epoch_075.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_075.pt,34.294231,33.432203,33.910275,0.838713,0.838714,False
+2,90,checkpoint_epoch_090.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_090.pt,33.775282,32.960327,33.400845,0.843522,0.843523,False
+2,105,checkpoint_epoch_105.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_105.pt,33.233529,32.555478,32.981358,0.847428,0.847429,False
+2,120,checkpoint_epoch_120.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_120.pt,33.727635,33.061713,33.505165,0.842543,0.842544,False
+2,121,checkpoint_epoch_121_final.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_low&int_MP_best/fold_2/checkpoint_epoch_121_final.pt,33.659991,32.449845,32.883907,0.848328,0.848329,True
