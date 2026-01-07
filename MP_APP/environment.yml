@@ -1,0 +1,8 @@
+name: mp_app
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - rdkit=2023.9.1
+  - flask
+  - pillow

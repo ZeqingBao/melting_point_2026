@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MP Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+      :root{--brand:#5b8cff;--muted:#6b7280;--glass: rgba(255,255,255,0.7)}
+      html,body{height:100%}
+      body { font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial; background: linear-gradient(180deg,#eef6ff 0%, #f6f8fb 100%); }
+      .hero { padding: 3.5rem 1rem; }
+      .app-wrap{max-width:1100px;margin:0 auto}
+      .card-quiet { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,252,255,0.85)); border: 0; border-radius: 14px; box-shadow: 0 8px 30px rgba(16,24,40,0.08); }
+      textarea.form-control { min-height: 140px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; resize: vertical; }
+      .mol-img { max-width: 320px; border-radius: 12px; border: 1px solid rgba(15,23,42,0.06); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
+      .metric { font-size: 2.4rem; font-weight:800; color:var(--brand); }
+      .prop-key{font-weight:600;color:var(--muted)}
+      .badge-prop{background:#f1f5f9;color:#0f172a;border-radius:8px;padding:6px 10px;font-weight:600}
+      .btn-primary{background:linear-gradient(90deg,var(--brand),#3aa0ff);border:0}
+      .small-muted{color:var(--muted)}
+      .fade-in{animation:fadeIn .35s ease-out both}
+      @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    </style>
+  </head>
+  <body>
+    <div class="container hero">
+      <div class="row text-center mb-3">
+        <div class="col-12">
+          <h1 class="mb-0">Melting-Point Predictor</h1>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="btn-group" role="group" aria-label="View toggle">
+            <input type="radio" class="btn-check" name="viewToggle" id="viewSingle" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="viewSingle">Single</label>
+
+            <input type="radio" class="btn-check" name="viewToggle" id="viewBatch" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="viewBatch">Batch</label>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-start">
+        <!-- Left: Single prediction (input on top, output below) -->
+        <div id="singlePanel" class="col-md-6">
+          <h4 class="mb-3 text-md-start text-center">Single</h4>
+          <p class="text-muted">Paste a SMILES string and get structure, descriptors and a placeholder melting-point prediction.</p>
+
+          {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+          {% endif %}
+
+          <!-- Single input -->
+          <div class="card card-quiet mb-3 fade-in">
+            <div class="card-body">
+              <form method="post" action="/">
+                <div class="mb-3">
+                  <label for="smiles" class="form-label small-muted">SMILES</label>
+                  <div class="input-group">
+                    <textarea id="smiles" name="smiles" class="form-control" placeholder="e.g. CC(=O)Oc1ccccc1C(=O)O">{{ request.form.smiles or '' }}</textarea>
+                  </div>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-primary d-flex align-items-center" type="submit"><i class="bi bi-lightning-charge-fill me-2"></i>Predict</button>
+                  <button type="button" class="btn btn-outline-secondary" id="resetBtn"><i class="bi bi-arrow-clockwise"></i>&nbsp;Reset</button>
+                  <button type="button" class="btn btn-outline-secondary" id="copyBtn" title="Copy SMILES"><i class="bi bi-clipboard"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="text-muted small">Examples: <code>CCO</code> &middot; <code>CC(=O)O</code> &middot; <code>OC(=O)COC(=O)CC1=CC=CC=C1NC1=C(Cl)C=CC=C1Cl</code></div>
+
+          <!-- Single output -->
+          <div class="fade-in mt-3">
+            {% if result %}
+              <div class="card card-quiet mb-3">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                      <h5 class="mb-0">Prediction</h5>
+                      <div class="small-muted">SMILES: <span class="badge-prop">{{ result.smiles }}</span></div>
+                    </div>
+                    <div class="text-end">
+                      <div class="metric">{{ result.mp }} °C</div>
+                      <div class="small-muted">Predicted melting point</div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 align-items-center">
+                    <div class="col-md-6 text-center">
+                      {% if result.props.img %}
+                        <img src="{{ result.props.img }}" alt="structure" class="mol-img mb-2" />
+                      {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex flex-wrap gap-2 mb-3">
+                        <div class="badge-prop">MolWt: {{ result.props.mw }}</div>
+                        <div class="badge-prop">LogP: {{ result.props.logp }}</div>
+                        <div class="badge-prop">TPSA: {{ result.props.tpsa }}</div>
+                        <div class="badge-prop">HBD: {{ result.props.hbd }}</div>
+                        <div class="badge-prop">HBA: {{ result.props.hba }}</div>
+                      </div>
+                      <div class="small-muted">These properties are computed with RDKit. Replace the placeholder model with your trained model when ready.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="card card-quiet">
+                <div class="card-body text-center text-muted">
+                  <i class="bi bi-activity" style="font-size:28px"></i>
+                  <div class="mt-2">Enter a SMILES string to see the predicted melting point and properties here.</div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Right: Batch (input on top, preview/output below) -->
+        <div id="batchPanel" class="col-md-6">
+          <h4 class="mb-3 text-md-end text-center">Batch</h4>
+          <div class="card card-quiet mb-3 fade-in">
+            <div class="card-body">
+              <h5 class="mb-2">Batch CSV</h5>
+              <p class="small-muted">Upload a CSV with a SMILES column (header optional). Returns a downloadable CSV with predictions.</p>
+              <form method="post" action="/batch" enctype="multipart/form-data" id="batchForm">
+                <div class="mb-3">
+                  <input class="form-control" type="file" id="batchFileInput" name="file" accept=".csv" />
+                </div>
+                <div class="d-flex gap-2 align-items-center">
+                  <button class="btn btn-outline-primary" id="batchSubmit">Upload</button>
+                  <div id="uploadProgress" style="display:none;flex:1">
+                    <div class="progress" style="height:10px">
+                      <div id="uploadBar" class="progress-bar" role="progressbar" style="width:0%"></div>
+                    </div>
+                  </div>
+                  <a id="batchDownloadLink" href="#" style="display:none" class="btn btn-success">Download CSV</a>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Batch preview / output (always render table for AJAX) -->
+          <div class="card card-quiet fade-in">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-lg-6 mb-3">
+                  <div class="small-muted mb-2">Uploaded (first {{ batch_in|length if batch_in else 0 }} rows)</div>
+                  <div class="table-responsive" style="max-height:300px;overflow:auto">
+                    <table class="table table-sm">
+                      <thead><tr><th>SMILES</th></tr></thead>
+                      <tbody id="batchInputTbody">
+                        {% if batch_in %}
+                          {% for r in batch_in %}
+                            <tr><td style="font-family: ui-monospace">{{ r[0] }}</td></tr>
+                          {% endfor %}
+                        {% else %}
+                          <tr><td class="text-muted">No uploaded rows yet.</td></tr>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-3">
+                  <div class="small-muted mb-2">Predicted (first {{ batch_out|length if batch_out else 0 }} rows)</div>
+                  <div class="table-responsive" style="max-height:300px;overflow:auto">
+                    <table class="table table-sm">
+                      <thead><tr><th>SMILES</th><th>Predicted MP (°C)</th></tr></thead>
+                      <tbody id="batchOutputTbody">
+                        {% if batch_out %}
+                          {% for r in batch_out %}
+                            <tr><td style="font-family: ui-monospace">{{ r[0] }}</td><td>{{ r[1] }}</td></tr>
+                          {% endfor %}
+                        {% else %}
+                          <tr><td colspan="2" class="text-muted">No predictions yet.</td></tr>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              {% if batch_file %}
+                <div class="mt-2"><a class="btn btn-link" href="/download/{{ batch_file }}">Download results</a></div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Small client interactions: reset and copy
+      (function(){
+        const resetBtn = document.getElementById('resetBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const txt = document.getElementById('smiles');
+        if(resetBtn){ resetBtn.addEventListener('click', ()=>{ txt.value=''; txt.focus(); }); }
+        if(copyBtn){ copyBtn.addEventListener('click', ()=>{ navigator.clipboard?.writeText(txt.value || '').then(()=>{ copyBtn.innerHTML = '<i class="bi bi-clipboard-check"></i>'; setTimeout(()=>{ copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>'; },900); }); }); }
+      })();
+    </script>
+    <script>
+      // AJAX batch upload with progress
+      (function(){
+        const form = document.getElementById('batchForm');
+        if(!form) return;
+        const fileInput = document.getElementById('batchFileInput');
+        const submitBtn = document.getElementById('batchSubmit');
+        const progressWrap = document.getElementById('uploadProgress');
+        const progressBar = document.getElementById('uploadBar');
+        const downloadLink = document.getElementById('batchDownloadLink');
+
+        form.addEventListener('submit', function(e){
+          // If user has JS enabled, perform AJAX upload to /batch_ajax
+          e.preventDefault();
+          if(!fileInput || !fileInput.files || fileInput.files.length===0){
+            alert('Please select a CSV file to upload.');
+            return;
+          }
+
+          const fd = new FormData();
+          fd.append('file', fileInput.files[0]);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST','/batch_ajax', true);
+
+          xhr.upload.onprogress = function(evt){
+            if(evt.lengthComputable){
+              const pct = Math.round((evt.loaded/evt.total)*100);
+              progressWrap.style.display = 'block';
+              progressBar.style.width = pct + '%';
+            }
+          };
+
+          xhr.onload = function(){
+            progressBar.style.width = '100%';
+            setTimeout(()=>{ progressWrap.style.display='none'; progressBar.style.width='0%'; },400);
+            if(xhr.status>=200 && xhr.status<300){
+              let data = {};
+              try{ data = JSON.parse(xhr.responseText); }catch(err){ alert('Upload failed: invalid server response'); return; }
+              if(data.error){ alert('Error: '+data.error); return; }
+
+              // populate uploaded preview
+              const inRows = data.preview_in || [];
+              const inTbody = document.getElementById('batchInputTbody');
+              if(inTbody){
+                inTbody.innerHTML = '';
+                if(inRows.length===0){
+                  const tr = document.createElement('tr'); const td = document.createElement('td'); td.className='text-muted'; td.colSpan=1; td.textContent='No uploaded rows.'; tr.appendChild(td); inTbody.appendChild(tr);
+                } else {
+                  for(const row of inRows){
+                    const tr = document.createElement('tr');
+                    const td1 = document.createElement('td'); td1.textContent = row[0]; td1.style.fontFamily='ui-monospace'; td1.style.fontSize='0.95rem'; tr.appendChild(td1);
+                    inTbody.appendChild(tr);
+                  }
+                }
+              }
+
+              // populate predicted preview
+              const outRows = data.preview_out || [];
+              const outTbody = document.getElementById('batchOutputTbody');
+              if(outTbody){
+                outTbody.innerHTML = '';
+                if(outRows.length===0){
+                  const tr = document.createElement('tr'); const td = document.createElement('td'); td.className='text-muted'; td.colSpan=2; td.textContent='No predictions yet.'; tr.appendChild(td); outTbody.appendChild(tr);
+                } else {
+                  for(const row of outRows){
+                    const tr = document.createElement('tr');
+                    const td1 = document.createElement('td'); td1.textContent = row[0]; td1.style.fontFamily='ui-monospace'; td1.style.fontSize='0.95rem'; tr.appendChild(td1);
+                    const td2 = document.createElement('td'); td2.textContent = (row[1]===null || row[1]==='')? '' : row[1]; tr.appendChild(td2);
+                    outTbody.appendChild(tr);
+                  }
+                }
+              }
+
+              if(data.file){
+                downloadLink.href = '/download/'+data.file;
+                downloadLink.style.display = 'inline-block';
+              }
+            } else {
+              alert('Upload failed with status '+xhr.status);
+            }
+          };
+
+          xhr.onerror = function(){ alert('Upload failed due to a network error'); };
+          xhr.send(fd);
+        });
+      })();
+    </script>
+    <script>
+      // Toggle view control: Both / Single / Batch
+      (function(){
+        const viewSingle = document.getElementById('viewSingle');
+        const viewBatch = document.getElementById('viewBatch');
+        const singlePanel = document.getElementById('singlePanel');
+        const batchPanel = document.getElementById('batchPanel');
+
+        function applyView(){
+          if(viewSingle.checked){
+            singlePanel.className = 'col-12';
+            batchPanel.className = 'd-none';
+          } else if(viewBatch.checked){
+            batchPanel.className = 'col-12';
+            singlePanel.className = 'd-none';
+          }
+        }
+
+        [viewSingle, viewBatch].forEach(r => r && r.addEventListener('change', applyView));
+        // initialize
+        applyView();
+      })();
+    </script>
+  </body>
+</html>
