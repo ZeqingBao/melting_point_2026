@@ -237,12 +237,39 @@ def reduce_features_by_RFE(df_features, df_target, n_features_to_select, step=1,
     # Create summary dataframe
     summary_df = pd.DataFrame(results)
     
+    # --- New Logic: Select least features within 5% of best performance ---
+    metric_col = f'{metric}_mean'
+    
+    if metric.lower() == 'r2':
+        # Higher is better
+        global_best_score = summary_df[metric_col].max()
+        threshold = global_best_score - abs(global_best_score) * 0.05
+        # Candidates: score >= threshold
+        candidates = summary_df[summary_df[metric_col] >= threshold]
+    else:
+        # Lower is better (RMSE, MAE)
+        global_best_score = summary_df[metric_col].min()
+        threshold = global_best_score + abs(global_best_score) * 0.05
+        # Candidates: score <= threshold
+        candidates = summary_df[summary_df[metric_col] <= threshold]
+        
+    # Select feature set with least features among candidates
+    best_step_idx = candidates['n_features'].idxmin()
+    best_step = candidates.loc[best_step_idx]
+    
+    best_features = best_step['selected_features']
+    best_score = best_step[metric_col]
+    
+    print(f"\nGlobal best {metric.upper()}: {global_best_score:.4f}")
+    print(f"Threshold (5% tolerance): {threshold:.4f}")
+    # ----------------------------------------------------------------------
+
     # Reduce features to best set
     df_best_features = df_features[best_features]
     
-    print(f"\n✓ RFE Feature Selection Complete")
-    print(f"  Best number of features: {len(best_features)}")
-    print(f"  Best {metric.upper()}: {best_score:.4f}")
+    print(f"\n✓ RFE Feature Selection Complete (Parsimonious)")
+    print(f"  Selected number of features: {len(best_features)}")
+    print(f"  Selected {metric.upper()}: {best_score:.4f}")
     print(f"  Best features: {best_features[:5]}{'...' if len(best_features) > 5 else ''}")
     
     return {
@@ -264,12 +291,18 @@ def RFE_plot(RFE_results):
     metric_std_col = metric_col.replace('_mean', '_std')
     metric_label = metric_col.split('_')[0].upper()
     
-    # Identify best performance
+    # Identify best performance (Parsimonious: least features within 5% of global best)
     if 'r2' in metric_col.lower():
-        best_idx = summary[metric_col].idxmax()
+        global_best = summary[metric_col].max()
+        threshold = global_best - abs(global_best) * 0.05
+        candidates = summary[summary[metric_col] >= threshold]
+        best_idx = candidates['n_features'].idxmin()
         direction = 'max'
     else:
-        best_idx = summary[metric_col].idxmin()
+        global_best = summary[metric_col].min()
+        threshold = global_best + abs(global_best) * 0.05
+        candidates = summary[summary[metric_col] <= threshold]
+        best_idx = candidates['n_features'].idxmin()
         direction = 'min'
         
     best_n = summary.loc[best_idx, 'n_features']
