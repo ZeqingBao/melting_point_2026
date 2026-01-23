@@ -218,7 +218,8 @@ def reduce_features_by_RFE(df_features, df_target, n_features_to_select, step=1,
         })
         
         # Print iteration info
-        print(f"Iteration {iteration}/{n_iterations} | Features: {len(selected_features)} | {metric.upper()}: {cv_scores_metric.mean():.4f} ± {cv_scores_metric.std():.4f} | Removed: [{removed_str}]")
+        if iteration % 10 == 0:
+            print(f"Iteration {iteration}/{n_iterations} | Features: {len(selected_features)} | {metric.upper()}: {cv_scores_metric.mean():.4f} ± {cv_scores_metric.std():.4f} | Removed: [{removed_str}]")
         
         # Update progress bar
         pbar.update(1)
