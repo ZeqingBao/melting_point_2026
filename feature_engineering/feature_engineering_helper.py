@@ -65,6 +65,10 @@ def smiles_to_features(dataframe, feature_type):
             data_with_features[f'MACCS_{i}'] = maccs_array[:, i]
         
         print(f"✓ MACCS: Added 167 features")
+
+        # Organize the columns alphabetically
+    data_with_features = data_with_features.reindex(sorted(data_with_features.columns), axis=1)
+
     
     return data_with_features
 
@@ -122,7 +126,7 @@ def reduce_features_by_variance(df_X, variance_threshold=0.01):
 
 
 
-def reduce_features_by_RFE(df_features, df_target, n_features_to_select, step=1, 
+def reduce_features_by_RFE(df_features, df_target, n_features_to_select, tolerance, step=1, 
                           metric='rmse', cv_strategy=None):
     """
     Perform Recursive Feature Elimination (RFE) with XGBoost and cross-validation.
@@ -237,19 +241,19 @@ def reduce_features_by_RFE(df_features, df_target, n_features_to_select, step=1,
     # Create summary dataframe
     summary_df = pd.DataFrame(results)
     
-    # --- New Logic: Select least features within 5% of best performance ---
+    # --- New Logic: Select least features within tolerance of best performance ---
     metric_col = f'{metric}_mean'
     
     if metric.lower() == 'r2':
         # Higher is better
         global_best_score = summary_df[metric_col].max()
-        threshold = global_best_score - abs(global_best_score) * 0.05
+        threshold = global_best_score - abs(global_best_score) * tolerance
         # Candidates: score >= threshold
         candidates = summary_df[summary_df[metric_col] >= threshold]
     else:
         # Lower is better (RMSE, MAE)
         global_best_score = summary_df[metric_col].min()
-        threshold = global_best_score + abs(global_best_score) * 0.05
+        threshold = global_best_score + abs(global_best_score) * tolerance
         # Candidates: score <= threshold
         candidates = summary_df[summary_df[metric_col] <= threshold]
         
@@ -260,27 +264,44 @@ def reduce_features_by_RFE(df_features, df_target, n_features_to_select, step=1,
     best_features = best_step['selected_features']
     best_score = best_step[metric_col]
     
+    # Sort best_features by importance
+    # Use the estimator from the best step to get feature importances
+    n_best = len(best_features)
+    X_best = df_features[best_features]
+    
+    estimator.fit(X_best, y)
+    importances = estimator.feature_importances_
+    
+    # Create a DataFrame to sort features
+    feature_importance_df = pd.DataFrame({
+        'feature': best_features,
+        'importance': importances
+    }).sort_values(by='importance', ascending=False)
+    
+    best_features_sorted = feature_importance_df['feature'].tolist()
+    
     print(f"\nGlobal best {metric.upper()}: {global_best_score:.4f}")
-    print(f"Threshold (5% tolerance): {threshold:.4f}")
+    print(f"Threshold ({tolerance*100:.1f}% tolerance): {threshold:.4f}")
     # ----------------------------------------------------------------------
 
-    # Reduce features to best set
-    df_best_features = df_features[best_features]
+    # Reduce features to best set (sorted)
+    df_best_features = df_features[best_features_sorted]
     
     print(f"\n✓ RFE Feature Selection Complete (Parsimonious)")
-    print(f"  Selected number of features: {len(best_features)}")
+    print(f"  Selected number of features: {len(best_features_sorted)}")
     print(f"  Selected {metric.upper()}: {best_score:.4f}")
-    print(f"  Best features: {best_features[:5]}{'...' if len(best_features) > 5 else ''}")
+    print(f"  Best features (Top 5): {best_features_sorted[:5]}")
     
     return {
         'summary': summary_df,
-        'best_features': best_features,
-        'n_best_features': len(best_features),
+        'best_features': best_features_sorted,
+        'feature_importances': feature_importance_df,
+        'n_best_features': len(best_features_sorted),
         'df_best_features': df_best_features
     }
 
 
-def RFE_plot(RFE_results):
+def RFE_plot(RFE_results, tolerance):
     summary = RFE_results['summary'].copy()
     
     # Sort by n_features to ensure line plot is correct
@@ -291,16 +312,16 @@ def RFE_plot(RFE_results):
     metric_std_col = metric_col.replace('_mean', '_std')
     metric_label = metric_col.split('_')[0].upper()
     
-    # Identify best performance (Parsimonious: least features within 5% of global best)
+    # Identify best performance (Parsimonious: least features within tolerance of global best)
     if 'r2' in metric_col.lower():
         global_best = summary[metric_col].max()
-        threshold = global_best - abs(global_best) * 0.05
+        threshold = global_best - abs(global_best) * tolerance
         candidates = summary[summary[metric_col] >= threshold]
         best_idx = candidates['n_features'].idxmin()
         direction = 'max'
     else:
         global_best = summary[metric_col].min()
-        threshold = global_best + abs(global_best) * 0.05
+        threshold = global_best + abs(global_best) * tolerance
         candidates = summary[summary[metric_col] <= threshold]
         best_idx = candidates['n_features'].idxmin()
         direction = 'min'
@@ -375,16 +396,24 @@ def RFE_plot(RFE_results):
 
 
 
-def feature_interaction(df):
+def feature_interaction(df, top_n_features=None):
     
     # Get all feature columns
     features = df.columns.tolist()
+    
+    # If top_n_features is specified, keep only the first n features (most important)
+    if top_n_features is not None:
+        print(f"Selecting top {top_n_features} features for interaction generation out of {len(features)} available.")
+        features = features[:top_n_features]
+    
+    # Organize selected features alphabetically
+    features = sorted(features)
     
     # Generate combinations of 2 features
     # usage of combinations implies NO self-interaction (A X A)
     combinations = list(itertools.combinations(features, 2))
     
-    print(f"Generating {len(combinations)} interaction features from {len(features)} original features...")
+    print(f"Generating {len(combinations)} interaction features from {len(features)} features...")
     
     # Collect new features in a dictionary
     new_features = {}
@@ -407,10 +436,139 @@ def dataset_featurization(data_with_smiles, selected_features, path):
     data_with_features = smiles_to_features(smiles, ['rdkit', 'maccs']).drop(columns=['SMILES'], axis=1)
     data_with_feature_interactions = feature_interaction(data_with_features)
     selected_features = data_with_feature_interactions[selected_features]
-    final_dataset = pd.concat([data_with_smiles[['SMILES', 'MP', 'Type']], selected_features], axis=1)
+    final_dataset = pd.concat([data_with_smiles[['SMILES', 'MP', 'Type', 'Ro5']], selected_features], axis=1)
 
     # Save final dataset
     final_dataset.to_parquet(f'{path}.parquet', index=False)
     print(f"{path} dataset saved.")
 
     return final_dataset
+
+
+def check_Ro5(smiles, threshold=1):
+    """
+    Check if a molecule (SMILES) follows Lipinski's Rule of 5.
+    
+    Lipinski's Rule of 5:
+    - Molecular Weight <= 500 Da
+    - LogP <= 5
+    - Hydrogen Bond Donors <= 5
+    - Hydrogen Bond Acceptors <= 10
+    
+    Allowed to have up to 1 violation to still be considered drug-like (Ro5).
+    If > 1 violation, it is considered broken Ro5 (bRo5).
+    
+    Args:
+        smiles (str): SMILES string of the molecule.
+        
+    Returns:
+        str: 'Ro5' if violations <= 1, else 'bRo5'.
+    """
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            return 'Invalid SMILES'
+            
+        mw = Descriptors.MolWt(mol)
+        logp = Descriptors.MolLogP(mol)
+        hbd = Descriptors.NumHDonors(mol)
+        hba = Descriptors.NumHAcceptors(mol)
+        
+        violations = 0
+        if mw > 500:
+            violations += 1
+        if logp > 5:
+            violations += 1
+        if hbd > 5:
+            violations += 1
+        if hba > 10:
+            violations += 1
+            
+        if violations <= threshold:
+            return 1
+        else:
+            return 0
+            
+    except Exception as e:
+        print(f"Error processing SMILES {smiles}: {e}")
+        return 'Error'
+
+
+def clean_dataset(dataframe, low_bound = 0, high_bound = 500, mp_col='MP', smiles_col='SMILES'):
+    
+    print(f"Initial shape: {dataframe.shape}")
+    
+    # Make a working copy
+    df = dataframe.copy()
+    
+    # 1. Remove MP < low_bound
+    # Ensure MP is numeric
+    df[mp_col] = pd.to_numeric(df[mp_col], errors='coerce')
+    
+    mask_mp_lt_low = df[mp_col] < low_bound
+    removed_mp = df[mask_mp_lt_low]
+    df_mp_clean = df[~mask_mp_lt_low].copy()
+    
+    print(f"Removed {len(removed_mp)} rows with MP < {low_bound}")
+    
+    # 2. Remove MP > high_bound
+    mask_mp_gt_high = df_mp_clean[mp_col] > high_bound
+    removed_mp_high = df_mp_clean[mask_mp_gt_high]
+    df_mp_clean = df_mp_clean[~mask_mp_gt_high].copy()
+    print(f"Removed {len(removed_mp_high)} rows with MP > {high_bound}")
+    
+    print(f"Final shape: {df_mp_clean.shape}")
+    return df_mp_clean
+
+
+def combine_features(df_Ro5_X_final, df_bRo5_X_final):
+
+    # Number of features in each set
+    n_features_Ro5 = df_Ro5_X_final.shape[1]
+    n_features_bRo5 = df_bRo5_X_final.shape[1]
+    print(f"Number of features in Ro5 dataset: {n_features_Ro5}")
+    print(f"Number of features in bRo5 dataset: {n_features_bRo5}")
+
+    # Number of overlapping features
+    overlapping_features = set(df_Ro5_X_final.columns).intersection(set(df_bRo5_X_final.columns))
+    n_overlapping_features = len(overlapping_features)
+    print(f"Number of overlapping features: {n_overlapping_features}")
+    print(f"Overlapping features: {overlapping_features}")
+
+    # Combine features
+    combined_features = list(set(df_Ro5_X_final.columns).union(set(df_bRo5_X_final.columns)))
+    print(f"Total number of combined features: {len(combined_features)}")
+
+    return combined_features
+
+
+
+def standardize_data(dataframe, scaler_path):
+
+    df_scaled = dataframe.copy()
+    
+    # Identify feature columns (exclude non-feature columns)
+    non_feature_cols = ['SMILES', 'MP', 'Ro5', 'Type']
+    feature_cols = [col for col in df_scaled.columns if col not in non_feature_cols]
+    
+    print(f"Number of feature columns to standardize: {len(feature_cols)}")
+ 
+    # Generate scaler using only training data
+    train_df = df_scaled[df_scaled['Type'] == 'Train']
+    
+    if len(train_df) == 0:
+        raise ValueError(f"No training data found. 'Type' column values: {df_scaled['Type'].unique()}")
+        
+    scaler = StandardScaler()
+    scaler.fit(train_df[feature_cols])
+    
+    # Save the scaler
+    with open(scaler_path, 'wb') as f:
+        pickle.dump(scaler, f)
+    print(f"Scaler saved to {scaler_path}")
+    
+    # Apply to the whole dataset
+    df_scaled[feature_cols] = scaler.transform(df_scaled[feature_cols])
+
+    
+    return df_scaled
