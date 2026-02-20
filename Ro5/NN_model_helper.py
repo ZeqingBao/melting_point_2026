@@ -70,6 +70,10 @@ def find_optimal_clusters(X_scaled, max_k=15, random_state=0, plot=True):
     print(f"Elbow k: {k_elbow} | Best silhouette k: {k_sil} | Selected k_opt: {k_opt}")
     return k_opt
 
+
+
+
+
 def plot_training_progress(train_losses, val_losses, early_stop_epoch=None, title="Training and Validation Loss"):
 
     epochs = range(1, len(train_losses) + 1) 
@@ -336,4 +340,198 @@ def evaluate_fold(trial, fold_idx, X_train_scaled, y_train, X_val_scaled, y_val,
     r2 = r2_score(y_val, preds_val)
     q2 = 1 - np.sum((y_val - preds_val)**2) / np.sum((y_val - y_train.mean())**2)
  
+    return rmse, r2, q2, model, train_losses, val_losses, stop_epoch
+
+
+def set_freeze_mode(model, freeze_level=0):
+    """
+    freeze_level:
+        0 = train all layers
+        1 = freeze first hidden block
+        2 = freeze first two hidden blocks
+        3 = freeze first three hidden blocks (if present)
+    """
+    block_size = 4  # [Linear, BatchNorm, ReLU, Dropout] per hidden layer
+
+    # Unfreeze everything first
+    for p in model.parameters():
+        p.requires_grad = True
+
+    if freeze_level == 0:
+        print("Freeze Level 0: all layers trainable")
+        return
+
+    # How many blocks actually exist?
+    n_blocks_total = len(model.network) // block_size  # e.g., 3 blocks for [256,128,64]
+    n_blocks = min(freeze_level, n_blocks_total)
+    print(f"Freeze Level {freeze_level}: freezing {n_blocks} block(s)")
+
+    for b in range(n_blocks):
+        start = b * block_size
+        for i in range(start, start + 2):  # [Linear, BatchNorm]
+            layer = model.network[i]
+            for p in layer.parameters():
+                p.requires_grad = False
+
+def evaluate_fold_TL(
+    trial, fold_idx,
+    X_train_scaled, y_train,
+    X_val_scaled,   y_val,
+    hidden_layers, dropout_rate,
+    learning_rate, weight_decay, batch_size,
+    freeze_level,                # 0,1,2,3 → how many feature blocks to freeze
+    baseline_ckpt,               # path to medium-range baseline .pth
+    max_epochs = 10**9,
+    patience   = 30,
+    min_delta  = 0.0,
+    X_test_scaled=None, y_test=None,
+    save_checkpoints=False, checkpoint_dir="checkpoints", save_every_n_epochs=15
+):
+    """
+    Transfer-learning fold trainer using a SINGLE learning rate (no param groups).
+    Expects pre-scaled numpy arrays (no scaling here).
+
+    Returns:
+        rmse, r2, q2, model, train_losses, val_losses, stop_epoch
+    """
+    device = torch.device("cpu")
+    print(f"Fold {fold_idx}: TL on cpu | freeze={freeze_level} | lr={learning_rate:g}")
+
+    # checkpoint bookkeeping
+    checkpoint_tracking = []
+    fold_checkpoint_dir = None
+    if save_checkpoints:
+        checkpoint_path = Path(checkpoint_dir)
+        checkpoint_path.mkdir(parents=True, exist_ok=True)
+        fold_checkpoint_dir = checkpoint_path / f"fold_{fold_idx}"
+        fold_checkpoint_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Checkpoints will be saved to: {fold_checkpoint_dir}")
+
+    # tensors/loaders (inputs are already scaled)
+    X_train_tensor = torch.tensor(X_train_scaled, dtype=torch.float32, device=device)
+    y_train_tensor = torch.tensor(y_train,        dtype=torch.float32, device=device)
+    X_val_tensor   = torch.tensor(X_val_scaled,   dtype=torch.float32, device=device)
+    y_val_tensor   = torch.tensor(y_val,          dtype=torch.float32, device=device)
+
+    train_loader = DataLoader(
+        TensorDataset(X_train_tensor, y_train_tensor),
+        batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True
+    )
+    val_loader = DataLoader(
+        TensorDataset(X_val_tensor, y_val_tensor),
+        batch_size=batch_size, shuffle=False, num_workers=0
+    )
+
+    # --- model: same arch as baseline; load baseline weights ---
+    model = ImprovedNN(
+        input_size = X_train_scaled.shape[1],
+        hidden_layers = hidden_layers,
+        dropout_rate  = dropout_rate
+    ).to(device)
+
+    state = torch.load(baseline_ckpt, map_location=device)
+    if isinstance(state, dict) and "model_state_dict" in state:
+        model.load_state_dict(state["model_state_dict"], strict=True)
+    else:
+        model.load_state_dict(state, strict=True)
+
+    # --- freeze policy ---
+    set_freeze_mode(model, freeze_level)
+
+    # --- optimizer: SINGLE LR over all trainable params ---
+    optimizer = optim.AdamW(
+        (p for p in model.parameters() if p.requires_grad),
+        lr=learning_rate,
+        weight_decay=weight_decay
+    )
+
+    # loss & scheduler & early stopping (same semantics as baseline)
+    criterion = RMSELoss()  # your existing class
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
+    early_stopper = EarlyStopper(patience=patience, min_delta=min_delta)
+
+    best_val_loss = float('inf')
+    best_state = copy.deepcopy(model.state_dict())
+    train_losses, val_losses = [], []
+    stop_epoch = None
+
+    # --- training loop ---
+    for epoch in range(1, max_epochs + 1):
+        model.train()
+        train_loss = 0.0
+        for xb, yb in train_loader:
+            optimizer.zero_grad()
+            preds = model(xb)                 # shape [B,] from your ImprovedNN
+            loss  = criterion(preds, yb)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
+            optimizer.step()
+            train_loss += loss.item()
+        train_loss /= len(train_loader)
+        train_losses.append(train_loss)
+
+        # validation
+        model.eval()
+        val_loss = 0.0
+        with torch.no_grad():
+            for xb, yb in val_loader:
+                preds = model(xb)
+                loss  = criterion(preds, yb)
+                val_loss += loss.item()
+        val_loss /= len(val_loader)
+        val_losses.append(val_loss)
+
+        scheduler.step(val_loss)
+
+        # track best
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            best_state = copy.deepcopy(model.state_dict())
+
+        # save periodic checkpoints
+        if save_checkpoints and (epoch % save_every_n_epochs == 0 or epoch == 1):
+            save_checkpoint(
+                model, optimizer, epoch, train_loss, val_loss,
+                y_train, y_val, val_loader, fold_idx,
+                fold_checkpoint_dir, checkpoint_tracking, is_final=False
+            )
+
+        # early stopping
+        if early_stopper.early_stop(val_loss, epoch=epoch):
+            stop_epoch = early_stopper.stop_epoch
+            print(f"[Fold {fold_idx}] Early stopping at epoch {stop_epoch} (best Val Loss: {best_val_loss:.4f})")
+            if save_checkpoints and epoch % save_every_n_epochs != 0 and epoch != 1:
+                save_checkpoint(
+                    model, optimizer, epoch, train_loss, val_loss,
+                    y_train, y_val, val_loader, fold_idx,
+                    fold_checkpoint_dir, checkpoint_tracking, is_final=True
+                )
+            break
+
+        if epoch % 50 == 0 or epoch == 1:
+            print(f"[Fold {fold_idx}] Epoch {epoch:4d} | Train {train_loss:.4f} | Val {val_loss:.4f} | ES {early_stopper.counter}/{patience}")
+
+    # restore best
+    model.load_state_dict(best_state)
+    model.eval()
+
+    # optional: export the checkpoint-tracking spreadsheet
+    if save_checkpoints and checkpoint_tracking:
+        df_checkpoints = pd.DataFrame(checkpoint_tracking)
+        spreadsheet_file = fold_checkpoint_dir / f"fold_{fold_idx}_checkpoints.csv"
+        df_checkpoints.to_csv(spreadsheet_file, index=False)
+        print(f"[Fold {fold_idx}] Checkpoint spreadsheet saved: {spreadsheet_file}")
+        print(f"[Fold {fold_idx}] Total checkpoints saved: {len(checkpoint_tracking)}")
+
+    # final metrics on validation
+    all_preds = []
+    with torch.no_grad():
+        for xb, _ in val_loader:
+            all_preds.append(model(xb).cpu().numpy())
+    preds_val = np.concatenate(all_preds)
+
+    rmse = root_mean_squared_error(y_val, preds_val)
+    r2   = r2_score(y_val, preds_val)
+    q2   = 1 - np.sum((y_val - preds_val)**2) / np.sum((y_val - y_train.mean())**2)
+
     return rmse, r2, q2, model, train_losses, val_losses, stop_epoch

@@ -1,0 +1,13 @@
+Fold,Epoch,Checkpoint_Type,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+3,1,regular,checkpoint_epoch_001_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_001_regular.pt,136.145298,128.466504,129.927658,-2.30494,-2.30203,False
+3,15,regular,checkpoint_epoch_015_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_015_regular.pt,41.44855,39.840186,40.989334,0.671071,0.671361,False
+3,30,regular,checkpoint_epoch_030_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_030_regular.pt,39.633849,38.64326,39.904232,0.688256,0.68853,False
+3,45,regular,checkpoint_epoch_045_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_045_regular.pt,38.749889,39.071611,40.219986,0.683303,0.683582,False
+3,60,regular,checkpoint_epoch_060_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_060_regular.pt,38.044958,37.661783,38.838245,0.704689,0.704949,False
+3,75,regular,checkpoint_epoch_075_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_075_regular.pt,36.996023,37.694366,38.891922,0.703872,0.704133,False
+3,90,regular,checkpoint_epoch_090_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_090_regular.pt,36.09725,40.547073,41.561424,0.661825,0.662123,False
+3,105,regular,checkpoint_epoch_105_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_105_regular.pt,35.234827,37.781609,38.93729,0.703181,0.703442,False
+3,120,regular,checkpoint_epoch_120_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_120_regular.pt,35.264804,37.705777,38.867622,0.704242,0.704503,False
+3,135,regular,checkpoint_epoch_135_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_135_regular.pt,34.580797,37.197493,38.488644,0.709982,0.710237,False
+3,150,regular,checkpoint_epoch_150_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_150_regular.pt,35.048068,37.81385,39.013439,0.702019,0.702281,False
+3,163,final,checkpoint_epoch_163_final.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_3/checkpoint_epoch_163_final.pt,35.05846,37.3036,38.5965,0.708354,0.708611,True

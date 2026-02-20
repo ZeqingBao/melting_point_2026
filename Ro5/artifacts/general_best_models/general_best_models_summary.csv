@@ -1,0 +1,11 @@
+Fold,RMSE,R2,Q2,Stop_Epoch,Model_Path
+0,37.47510528564453,0.7274908423423767,0.72751105,87,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_0.pt
+1,37.99739074707031,0.7126011848449707,0.7126057,141,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_1.pt
+2,36.718666076660156,0.7352156639099121,0.73534036,104,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_2.pt
+3,38.08448028564453,0.7160404920578003,0.71629053,163,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_3.pt
+4,35.921142578125,0.7466410398483276,0.7466419,154,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_4.pt
+5,38.38648986816406,0.7007592916488647,0.70080745,135,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_5.pt
+6,37.731563568115234,0.7111573219299316,0.71141344,158,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_6.pt
+7,37.00035095214844,0.718170166015625,0.7182685,112,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_7.pt
+8,37.38095474243164,0.7251561880111694,0.7251723,87,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_8.pt
+9,36.81144332885742,0.7195016145706177,0.71993685,110,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/artifacts/general_best_models/general_best_fold_9.pt

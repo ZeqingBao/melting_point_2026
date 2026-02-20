@@ -1,0 +1,22 @@
+{
+  "scenario": "freeze_fc1",
+  "freeze_vector": [
+    1,
+    0,
+    0
+  ],
+  "freeze_level": 1,
+  "best_fold": 9,
+  "checkpoint": "artifacts/TL_Ro5/freeze_fc1/final_fold_models/fold_9_best.pth",
+  "hidden_layers": [
+    224,
+    112,
+    56
+  ],
+  "best_params": {
+    "learning_rate": 0.0009551946771714858,
+    "weight_decay": 0.0009459303248566866,
+    "batch_size": 32,
+    "dropout_rate": 0.39358067494518556
+  }
+}

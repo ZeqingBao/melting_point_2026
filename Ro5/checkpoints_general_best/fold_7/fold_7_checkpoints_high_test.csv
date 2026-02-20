@@ -1,0 +1,10 @@
+Fold,Epoch,Checkpoint_Type,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+7,1,regular,checkpoint_epoch_001_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_001_regular.pt,134.351846,125.91556,126.747864,-2.307171,-2.306016,False
+7,15,regular,checkpoint_epoch_015_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_015_regular.pt,41.367466,38.302478,39.256371,0.682754,0.682865,False
+7,30,regular,checkpoint_epoch_030_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_030_regular.pt,39.451481,37.568149,38.582897,0.693546,0.693653,False
+7,45,regular,checkpoint_epoch_045_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_045_regular.pt,38.233763,37.473219,38.373013,0.696871,0.696977,False
+7,60,regular,checkpoint_epoch_060_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_060_regular.pt,37.485337,37.588644,38.615311,0.693031,0.693138,False
+7,75,regular,checkpoint_epoch_075_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_075_regular.pt,37.871463,36.369616,37.280674,0.713884,0.713983,False
+7,90,regular,checkpoint_epoch_090_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_090_regular.pt,36.775098,36.469305,37.482414,0.710779,0.71088,False
+7,105,regular,checkpoint_epoch_105_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_105_regular.pt,36.876117,36.561944,37.502544,0.710468,0.710569,False
+7,112,final,checkpoint_epoch_112_final.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best/fold_7/checkpoint_epoch_112_final.pt,36.617011,37.509681,38.430737,0.695959,0.696065,True
