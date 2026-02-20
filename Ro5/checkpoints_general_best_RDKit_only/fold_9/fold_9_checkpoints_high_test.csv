@@ -1,0 +1,10 @@
+Fold,Epoch,Checkpoint_Type,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
+9,1,regular,checkpoint_epoch_001_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_001_regular.pt,138.385334,132.211096,132.826004,-2.588379,-2.587866,False
+9,15,regular,checkpoint_epoch_015_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_015_regular.pt,43.425891,39.706134,40.515072,0.666139,0.666187,False
+9,30,regular,checkpoint_epoch_030_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_030_regular.pt,40.904131,39.829096,40.902309,0.659727,0.659775,False
+9,45,regular,checkpoint_epoch_045_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_045_regular.pt,39.817559,38.296424,39.047199,0.689893,0.689937,False
+9,60,regular,checkpoint_epoch_060_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_060_regular.pt,38.428256,38.38137,39.134224,0.688509,0.688554,False
+9,75,regular,checkpoint_epoch_075_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_075_regular.pt,38.156975,38.585026,39.375473,0.684657,0.684702,False
+9,90,regular,checkpoint_epoch_090_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_090_regular.pt,38.021347,38.57896,39.537411,0.682057,0.682103,False
+9,105,regular,checkpoint_epoch_105_regular.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_105_regular.pt,37.546615,38.495926,39.426037,0.683846,0.683892,False
+9,110,final,checkpoint_epoch_110_final.pt,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/Ro5/checkpoints_general_best_RDKit_only/fold_9/checkpoint_epoch_110_final.pt,37.686606,38.834202,39.680893,0.679746,0.679792,True

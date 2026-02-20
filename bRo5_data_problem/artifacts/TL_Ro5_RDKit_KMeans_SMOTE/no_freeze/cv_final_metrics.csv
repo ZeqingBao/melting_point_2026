@@ -1,0 +1,11 @@
+fold,rmse,r2,q2,checkpoint
+8,36.53963088989258,0.5799031257629395,0.5860042572021484,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_8_best.pth
+0,38.03292465209961,0.6955670118331909,0.7195404171943665,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_0_best.pth
+1,39.00266647338867,0.747037947177887,0.7505080699920654,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_1_best.pth
+2,39.63111877441406,0.608565628528595,0.6327611207962036,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_2_best.pth
+7,43.06108093261719,0.5994219779968262,0.6001607179641724,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_7_best.pth
+4,44.73769760131836,0.5355207324028015,0.5673552751541138,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_4_best.pth
+5,52.92849349975586,0.4310804009437561,0.431801974773407,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_5_best.pth
+3,53.86091995239258,0.5326775908470154,0.5910447835922241,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_3_best.pth
+6,56.468807220458984,0.5502275228500366,0.5538101196289062,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_6_best.pth
+9,56.64356231689453,0.5360714197158813,0.5361204743385315,artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_9_best.pth

@@ -1,0 +1,22 @@
+{
+  "scenario": "no_freeze",
+  "freeze_vector": [
+    0,
+    0,
+    0
+  ],
+  "freeze_level": 0,
+  "best_fold": 8,
+  "checkpoint": "artifacts/TL_Ro5_RDKit_KMeans_SMOTE/no_freeze/final_fold_models/fold_8_best.pth",
+  "hidden_layers": [
+    256,
+    128,
+    64
+  ],
+  "best_params": {
+    "learning_rate": 0.00048733791518309767,
+    "weight_decay": 0.0007133987119024935,
+    "batch_size": 16,
+    "dropout_rate": 0.2538567572092167
+  }
+}

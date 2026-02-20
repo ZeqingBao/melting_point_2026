@@ -1,0 +1,11 @@
+fold,rmse,r2,q2,checkpoint
+2,35.55005645751953,0.6850317120552063,0.7045006155967712,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_2_best.pth
+8,36.000003814697266,0.5922197103500366,0.5981419086456299,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_8_best.pth
+1,36.993133544921875,0.7724331617355347,0.775554895401001,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_1_best.pth
+0,37.54164123535156,0.7033811807632446,0.7267392873764038,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_0_best.pth
+7,41.64179992675781,0.6253926753997803,0.626083493232727,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_7_best.pth
+4,43.07870864868164,0.5693302154541016,0.598847508430481,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_4_best.pth
+5,52.26025390625,0.44535523653030396,0.4460586905479431,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_5_best.pth
+3,54.41026306152344,0.5230962038040161,0.5826601386070251,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_3_best.pth
+6,56.495147705078125,0.5498077869415283,0.5533937215805054,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_6_best.pth
+9,58.55341339111328,0.504259467124939,0.5043119192123413,artifacts/TL_Ro5_only_RDKit/no_freeze/final_fold_models/fold_9_best.pth

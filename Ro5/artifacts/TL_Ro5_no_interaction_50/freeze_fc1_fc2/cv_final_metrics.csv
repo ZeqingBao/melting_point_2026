@@ -1,0 +1,11 @@
+fold,rmse,r2,q2,checkpoint
+5,34.68220901489258,0.7703795433044434,0.7707571983337402,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_5_best.pth
+8,38.58760452270508,0.7094106674194336,0.7227692604064941,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_8_best.pth
+1,50.00008010864258,0.49738073348999023,0.49739283323287964,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_1_best.pth
+0,52.82550811767578,0.5681297779083252,0.5694065093994141,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_0_best.pth
+3,55.530094146728516,0.43701618909835815,0.4429076910018921,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_3_best.pth
+4,56.483489990234375,0.49403464794158936,0.5270465612411499,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_4_best.pth
+7,59.57712936401367,0.47375059127807617,0.5087614059448242,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_7_best.pth
+6,61.97806930541992,0.5434703826904297,0.5434778332710266,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_6_best.pth
+9,66.2307357788086,0.4990479350090027,0.49920654296875,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_9_best.pth
+2,67.3713607788086,-0.39564263820648193,-0.29973042011260986,artifacts/TL_Ro5_no_interaction_50/freeze_fc1_fc2/final_fold_models/fold_2_best.pth
