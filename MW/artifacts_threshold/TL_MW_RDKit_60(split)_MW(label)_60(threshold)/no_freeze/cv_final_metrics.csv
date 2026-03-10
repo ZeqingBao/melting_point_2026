@@ -1,0 +1,11 @@
+fold,rmse,r2,q2,checkpoint
+0,36.39752960205078,0.7060199975967407,0.7062208652496338,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_0_best.pth
+9,36.54611587524414,0.7314699292182922,0.731471061706543,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_9_best.pth
+3,36.73165512084961,0.7212722897529602,0.7224984765052795,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_3_best.pth
+1,37.10470962524414,0.7192152738571167,0.7193726301193237,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_1_best.pth
+6,37.80155563354492,0.7182110548019409,0.7211611270904541,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_6_best.pth
+8,38.77534866333008,0.702759861946106,0.7030080556869507,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_8_best.pth
+5,39.17428970336914,0.6647459864616394,0.6648808717727661,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_5_best.pth
+4,40.42937088012695,0.6518600583076477,0.6520227789878845,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_4_best.pth
+7,40.459007263183594,0.6684361696243286,0.669622540473938,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_7_best.pth
+2,40.913490295410156,0.6627627611160278,0.6638171672821045,artifacts_threshold/TL_MW_RDKit_60(split)_MW(label)_60(threshold)/no_freeze/final_fold_models/fold_2_best.pth

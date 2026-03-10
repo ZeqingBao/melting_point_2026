@@ -1,0 +1,11 @@
+Fold,RMSE,R2,Q2,Stop_Epoch,Model_Path
+0,31.074337005615234,-0.022668957710266113,-0.022487283,187,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_0.pt
+1,37.85377502441406,0.014155805110931396,0.014352083,197,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_1.pt
+2,29.096115112304688,-0.15454578399658203,-0.15104687,177,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_2.pt
+3,27.425683975219727,-0.0167616605758667,-0.005404234,240,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_3.pt
+4,25.96941566467285,0.33699995279312134,0.34145802,265,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_4.pt
+5,24.611865997314453,-0.21772265434265137,-0.21598709,195,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_5.pt
+6,28.112661361694336,0.06460565328598022,0.06482506,182,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_6.pt
+7,31.122119903564453,-0.18328797817230225,-0.1821425,193,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_7.pt
+8,24.11864471435547,0.566882312297821,0.57012403,208,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_8.pt
+9,31.251178741455078,0.38337379693984985,0.38636607,212,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/transfer_learning/artifacts/high_MP_best_models/high_MP_best_fold_9.pt

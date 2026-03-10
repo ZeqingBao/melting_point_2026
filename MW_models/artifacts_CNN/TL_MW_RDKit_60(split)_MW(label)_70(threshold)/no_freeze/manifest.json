@@ -1,0 +1,18 @@
+{
+  "scenario": "no_freeze",
+  "freeze_vector": [
+    0,
+    0,
+    0
+  ],
+  "freeze_level": 0,
+  "model_type": "CNNRegressor",
+  "best_fold": 9,
+  "checkpoint": "artifacts_CNN/TL_MW_RDKit_60(split)_MW(label)_70(threshold)/no_freeze/final_fold_models/fold_9_best.pth",
+  "best_params": {
+    "learning_rate": 0.0007696620262036246,
+    "weight_decay": 7.562562951472516e-06,
+    "batch_size": 16,
+    "dropout_rate": 0.4744293543241538
+  }
+}

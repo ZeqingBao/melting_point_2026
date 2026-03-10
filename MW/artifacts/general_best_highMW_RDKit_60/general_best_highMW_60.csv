@@ -1,0 +1,11 @@
+Fold,RMSE,R2,Q2,Stop_Epoch,Model_Path
+0,44.64696502685547,0.5812720060348511,0.5813043,148,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_0.pt
+1,38.7113151550293,0.6291205883026123,0.62932515,170,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_1.pt
+2,40.38396072387695,0.6242767572402954,0.63031936,169,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_2.pt
+3,40.40476608276367,0.6788522005081177,0.6794543,199,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_3.pt
+4,39.3068962097168,0.6101400852203369,0.61226726,167,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_4.pt
+5,37.775177001953125,0.6103865504264832,0.6108054,134,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_5.pt
+6,44.00300216674805,0.6297857165336609,0.6323241,169,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_6.pt
+7,40.35591125488281,0.6316846609115601,0.6317414,139,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_7.pt
+8,43.053462982177734,0.6227502822875977,0.62281924,129,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_8.pt
+9,41.58051300048828,0.5935418605804443,0.5935678,127,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts/general_best_highMW_RDKit_60/general_best_fold_9.pt

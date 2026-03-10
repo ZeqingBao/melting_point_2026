@@ -1,0 +1,11 @@
+Fold,RMSE,R2,Q2,Stop_Epoch,Model_Path
+0,36.122467041015625,0.7441622614860535,0.74424815,121,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_0.pt
+1,38.335655212402344,0.7104629278182983,0.710492,120,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_1.pt
+2,36.38870620727539,0.7362346649169922,0.73640853,158,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_2.pt
+3,35.420101165771484,0.748805046081543,0.7488328,165,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_3.pt
+4,37.52713394165039,0.7413449287414551,0.7416508,118,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_4.pt
+5,36.788002014160156,0.726325273513794,0.7263696,129,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_5.pt
+6,37.322837829589844,0.7160736918449402,0.7160886,115,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_6.pt
+7,34.11602020263672,0.7645115852355957,0.7646351,169,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_7.pt
+8,37.21987533569336,0.7305546998977661,0.7305893,107,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_8.pt
+9,37.61906433105469,0.7118666172027588,0.712013,174,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_9.pt

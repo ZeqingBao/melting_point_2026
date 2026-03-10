@@ -433,10 +433,8 @@ def feature_interaction(df, top_n_features=None):
 def dataset_featurization(data_with_smiles, selected_features, path):
 
     smiles = data_with_smiles[['SMILES']]
-    data_with_features = smiles_to_features(smiles, ['rdkit', 'maccs']).drop(columns=['SMILES'], axis=1)
-    data_with_feature_interactions = feature_interaction(data_with_features)
-    selected_features = data_with_feature_interactions[selected_features]
-    final_dataset = pd.concat([data_with_smiles[['SMILES', 'MP', 'Type', 'Ro5']], selected_features], axis=1)
+    data_with_features = smiles_to_features(smiles, ['rdkit']).drop(columns=['SMILES'], axis=1)
+    final_dataset = pd.concat([data_with_smiles[['SMILES', 'MP', 'Type', 'MW_label']], selected_features], axis=1)
 
     # Save final dataset
     final_dataset.to_parquet(f'{path}.parquet', index=False)
@@ -445,7 +443,7 @@ def dataset_featurization(data_with_smiles, selected_features, path):
     return final_dataset
 
 
-def check_Ro5(smiles, threshold=1):
+def check_Ro5(smiles, threshold=0): # threshold changed to 0 from 1
     """
     Check if a molecule (SMILES) follows Lipinski's Rule of 5.
     
@@ -548,7 +546,7 @@ def standardize_data(dataframe, scaler_path):
     df_scaled = dataframe.copy()
     
     # Identify feature columns (exclude non-feature columns)
-    non_feature_cols = ['SMILES', 'MP', 'Ro5', 'Type']
+    non_feature_cols = ['SMILES', 'MP', 'MW_label', 'Type']
     feature_cols = [col for col in df_scaled.columns if col not in non_feature_cols]
     
     print(f"Number of feature columns to standardize: {len(feature_cols)}")
@@ -572,3 +570,31 @@ def standardize_data(dataframe, scaler_path):
 
     
     return df_scaled
+
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+
+def check_MW(smiles, threshold=300):
+    """
+    Label molecule based on molecular weight.
+
+    Args:
+        smiles (str): SMILES string of the molecule.
+        threshold (float): MW cutoff (default=300).
+
+    Returns:
+        int: 1 if MW > threshold, else 0
+             Returns 'Invalid SMILES' if parsing fails.
+    """
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            return 'Invalid SMILES'
+
+        mw = Descriptors.MolWt(mol)
+
+        return 1 if mw > threshold else 0
+
+    except Exception as e:
+        print(f"Error processing SMILES {smiles}: {e}")
+        return 'Error'

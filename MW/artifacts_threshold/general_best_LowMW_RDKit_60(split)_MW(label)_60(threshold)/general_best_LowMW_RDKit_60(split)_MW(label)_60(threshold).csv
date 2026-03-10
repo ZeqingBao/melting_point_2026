@@ -1,0 +1,11 @@
+Fold,RMSE,R2,Q2,Stop_Epoch,Model_Path
+0,35.164974212646484,0.7027032375335693,0.70270765,77,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_0.pt
+1,35.02723693847656,0.7214932441711426,0.72195387,133,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_1.pt
+2,33.98311996459961,0.7195324897766113,0.72099644,91,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_2.pt
+3,35.72466278076172,0.7053670287132263,0.7055423,127,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_3.pt
+4,33.435420989990234,0.7372479438781738,0.73765206,68,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_4.pt
+5,33.505516052246094,0.7514075636863708,0.75141406,104,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_5.pt
+6,33.77338409423828,0.7443827986717224,0.74600345,120,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_6.pt
+7,36.204227447509766,0.6825491189956665,0.6825533,136,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_7.pt
+8,36.6590690612793,0.7109012007713318,0.7115396,66,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_8.pt
+9,37.97712326049805,0.6675429344177246,0.6693076,120,/Users/sdl5_mp/Documents/GitHub/melting_point_2026/MW/artifacts_threshold/general_best_LowMW_RDKit_60(split)_MW(label)_60(threshold)/general_best_fold_9.pt
