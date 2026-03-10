@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd /Users/zeqing/0_Github/melting_point_2026/Ro5_multi_model && python -c \"\nimport json\nwith open\\('model_comparison\\.ipynb'\\) as f:\n    nb = json\\.load\\(f\\)\nfor i, cell in enumerate\\(nb\\['cells'\\]\\):\n    print\\(i, cell\\.get\\('id','\\?'\\), cell\\['source'\\]\\[:60\\] if cell\\['source'\\] else ''\\)\n\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd /Users/zeqing/0_Github/melting_point_2026/Ro5_multi_model && python -c \"\nimport json\nwith open\\('model_comparison\\.ipynb'\\) as f:\n    nb = json\\.load\\(f\\)\nprint\\('Total cells:', len\\(nb\\['cells'\\]\\)\\)\nfor i, cell in enumerate\\(nb\\['cells'\\]\\):\n    src = ''\\.join\\(cell\\['source'\\]\\)\n    print\\(f'--- Cell \\{i\\} id=\\{cell\\.get\\(\\\\\"id\\\\\",\\\\\"\\?\\\\\"\\)\\} ---'\\)\n    print\\(src\\[:200\\]\\)\n    print\\(\\)\n\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
