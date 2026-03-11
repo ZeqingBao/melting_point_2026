@@ -1,6 +1,0 @@
-Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,Accuracy,Is_Final
-9,1,checkpoint_epoch_001.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_binary_SVM_best/fold_9/checkpoint_epoch_001.pt,0.399802,0.209208,0.909762,False
-9,15,checkpoint_epoch_015.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_binary_SVM_best/fold_9/checkpoint_epoch_015.pt,0.122735,0.154767,0.942679,False
-9,30,checkpoint_epoch_030.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_binary_SVM_best/fold_9/checkpoint_epoch_030.pt,0.091216,0.133289,0.964245,False
-9,45,checkpoint_epoch_045.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_binary_SVM_best/fold_9/checkpoint_epoch_045.pt,0.074851,0.144931,0.96538,False
-9,55,checkpoint_epoch_055_final.pt,/Users/sdl5_mp/Documents/GitHub/SDL5_MP/transfer_learning/checkpoints_binary_SVM_best/fold_9/checkpoint_epoch_055_final.pt,0.062695,0.156481,0.964813,True

@@ -1,5 +1,0 @@
-Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,RMSE,R2,Q2,Is_Final
-5,1,checkpoint_epoch_001.pt,checkpoints_high_MP/trial_006/fold_5/checkpoint_epoch_001.pt,285.534521,287.758698,283.867035,-160.990387,-160.75949,False
-5,15,checkpoint_epoch_015.pt,checkpoints_high_MP/trial_006/fold_5/checkpoint_epoch_015.pt,285.366913,287.885132,283.997223,-161.139008,-160.9079,False
-5,30,checkpoint_epoch_030.pt,checkpoints_high_MP/trial_006/fold_5/checkpoint_epoch_030.pt,285.299966,287.871582,283.986816,-161.127136,-160.89606,False
-5,31,checkpoint_epoch_031_final.pt,checkpoints_high_MP/trial_006/fold_5/checkpoint_epoch_031_final.pt,285.438846,287.86348,283.980591,-161.12001,-160.88893,True

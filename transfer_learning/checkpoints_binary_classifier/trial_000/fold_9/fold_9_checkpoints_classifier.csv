@@ -1,7 +1,0 @@
-Fold,Epoch,Checkpoint_Filename,Checkpoint_Path,Train_Loss,Val_Loss,Accuracy,Is_Final
-9,1,checkpoint_epoch_001.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_001.pt,0.618046,0.468338,0.905789,False
-9,15,checkpoint_epoch_015.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_015.pt,0.127959,0.107625,0.963678,False
-9,30,checkpoint_epoch_030.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_030.pt,0.112193,0.100701,0.965948,False
-9,45,checkpoint_epoch_045.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_045.pt,0.101795,0.099374,0.965948,False
-9,60,checkpoint_epoch_060.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_060.pt,0.093348,0.102944,0.968785,False
-9,73,checkpoint_epoch_073_final.pt,checkpoints_binary_classifier/trial_000/fold_9/checkpoint_epoch_073_final.pt,0.087586,0.103228,0.968218,True
