@@ -105,7 +105,7 @@ def reduce_features_by_RFE(df_features, df_target, n_features_to_select, toleran
     """
     models = {
         'XGB': xgb.XGBRegressor(random_state=42, n_jobs=-1),
-        'LGB': lgb.LGBMRegressor(random_state=42, n_jobs=-1),
+        'LGB': lgb.LGBMRegressor(random_state=42, n_jobs=-1, verbosity=-1),
         'RF': RandomForestRegressor(random_state=42, n_jobs=-1)
     }
     # Create base estimator based on model parameter
