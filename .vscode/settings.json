@@ -7,6 +7,10 @@
         "/^cd /Users/zeqing/0_Github/melting_point_2026/Ro5_multi_model && python -c \"\nimport json\nwith open\\('model_comparison\\.ipynb'\\) as f:\n    nb = json\\.load\\(f\\)\nprint\\('Total cells:', len\\(nb\\['cells'\\]\\)\\)\nfor i, cell in enumerate\\(nb\\['cells'\\]\\):\n    src = ''\\.join\\(cell\\['source'\\]\\)\n    print\\(f'--- Cell \\{i\\} id=\\{cell\\.get\\(\\\\\"id\\\\\",\\\\\"\\?\\\\\"\\)\\} ---'\\)\n    print\\(src\\[:200\\]\\)\n    print\\(\\)\n\"$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^python3 -c \"import pandas as pd; df = pd\\.read_csv\\('5_model_confidence/model_confidence_results_LGB_All\\.csv'\\); print\\(df\\.columns\\.tolist\\(\\)\\); print\\(df\\.head\\(3\\)\\.to_string\\(\\)\\); print\\('shape:', df\\.shape\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
