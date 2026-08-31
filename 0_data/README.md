@@ -20,6 +20,15 @@ The five combined-data inputs are:
 | 4 | `sources/test_predictions.csv` | `exp MP` |
 | 4 | `sources/train_without_data_augmentation.csv` | `MP` |
 
+### Source publications
+
+| Source | Publication | DOI |
+|---:|---|---|
+| 1 | *Machine Learning Pipeline for Molecular Property Prediction Using ChemXploreML* | [10.1021/acs.jcim.5c00516](https://doi.org/10.1021/acs.jcim.5c00516) |
+| 2 | *Multi-Conformation Enhanced Equivariant Graph Neural Network: Advancing Melting Point Prediction Accuracy for Organic Small Molecules* | [10.1021/acsomega.5c04588](https://doi.org/10.1021/acsomega.5c04588) |
+| 3 | *The Development of Models to Predict Melting and Pyrolysis Point Data Associated with Several Hundred Thousand Compounds Mined from PATENTS* | [10.1186/s13321-016-0113-y](https://doi.org/10.1186/s13321-016-0113-y) |
+| 4 | *Prediction of Melting Points of Chemicals with a Data Augmentation-Based Neural Network Approach* | [10.1021/acsomega.5c00205](https://doi.org/10.1021/acsomega.5c00205) |
+
 ## Reproducing the outputs
 
 Open `combine_data_process.ipynb`, restart the kernel, and run all cells in order. The notebook overwrites:
