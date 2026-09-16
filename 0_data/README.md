@@ -1,5 +1,7 @@
 # Combined melting-point data
 
+![Combined melting-point data workflow](data_combining_process_diagram.png)
+
 ## Folder organization
 
 The original Bradley processing workflow is preserved in:
