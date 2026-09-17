@@ -1,0 +1,7 @@
+Split,MP_class,Compounds,Percent_within_split,Total_compounds_in_split,Train_fraction,Test_fraction,High_MP_threshold_C,Random_state,Split_method,Input_file,Input_SHA256
+all,low,281994,92.60643398531401,304508,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0
+all,high,22514,7.393566014685986,304508,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0
+train,low,225595,92.60650394489463,243606,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0
+train,high,18011,7.393496055105375,243606,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0
+test,low,56399,92.60615414928903,60902,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0
+test,high,4503,7.393845850710978,60902,0.8,0.2,250.0,2026,stratified_random_80_20,0_data/outputs/combined_data.parquet,6dc1a218d02f0a561674995471ebb38f1109322eb73b88bbaf24e1ba2abc6db0

@@ -23,7 +23,7 @@ treating the files already present in `outputs/` as current.
 ├── README.md
 ├── data_preparation.ipynb
 ├── combine_data_process.ipynb
-├── source_distribution_overlap_EDA.ipynb
+├── combined_data_analysis.ipynb
 ├── data_combining_process_diagram.png
 ├── input_datasets/
 │   ├── 1_ChemXplore_tmpC_Marimuthu_2025.csv
@@ -46,10 +46,11 @@ The active combination notebook does not read `original_curated/`,
 artifacts. The authoritative audit output is
 `outputs/multiple_MP_compounds.csv`.
 
-The current `source_distribution_overlap_EDA.ipynb` still contains the former
-`sources/` path and historical executed results. Update it to the
-`input_datasets/` and `outputs/` layout before treating a new execution as
-reproducible under this organization.
+`combined_data_analysis.ipynb` is the general analysis workspace. It reads the
+saved files from `outputs/` and independently rebuilds cleaned source-level
+observations from the four files in `input_datasets/` for distribution,
+low/high MP, overlap, and cross-source agreement analyses. It does not modify
+the combined dataset.
 
 ## Input datasets
 
