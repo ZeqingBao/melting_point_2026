@@ -11,11 +11,10 @@ The active combined-data pipeline is:
 
 ![Conceptual combined melting-point workflow](data_combining_process_diagram.png)
 
-> **Diagram note:** the diagram remains useful as a conceptual overview, but it
-> predates the consolidated Source 4 input and the integrated molecular-weight
-> filter. “Test + train CSVs” describes Source 4 provenance; the combination
-> notebook now reads one prepared Source 4 CSV. The historical compound count
-> printed in the diagram is superseded by the current counts reported below.
+The diagram reflects the consolidated Source 4 input, integrated molecular-
+weight filter, and fresh validated execution using the current input files.
+See the synchronization note under **Reproducing the combined outputs** before
+treating the files already present in `outputs/` as current.
 
 ## Active organization
 
