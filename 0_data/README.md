@@ -2,6 +2,11 @@
 
 ![Combined melting-point data workflow](data_combining_process_diagram.png)
 
+The diagram summarizes the core combination and MP-consensus workflow before the
+final molecular-weight filter. Its 304,683-compound count is the pre-MW consensus
+count. The final saved dataset contains 304,509 compounds after applying the
+strict `MW < 1000` filter described below.
+
 ## Folder organization
 
 The original Bradley processing workflow is preserved in:
@@ -11,6 +16,10 @@ The original Bradley processing workflow is preserved in:
 - `data_process.ipynb`
 
 The two Bradley CSVs produced by that workflow are copied into `sources/` alongside the other datasets used by the combined-data workflow. `combine_data_process.ipynb` reads only the files in `sources/`.
+
+`source_distribution_overlap_EDA.ipynb` independently rebuilds the cleaned
+source-level observations for distribution and overlap visualizations. It does
+not generate or modify the combined dataset.
 
 The five combined-data inputs are:
 
@@ -38,6 +47,13 @@ Open `combine_data_process.ipynb`, restart the kernel, and run all cells in orde
 - `combined_data.parquet`
 - `multiple_MP_compounds.csv`
 
+The notebook first writes the resolved consensus output and then applies the
+standalone molecular-weight cell to `combined_data.parquet`. That cell
+recalculates RDKit average molecular weight, adds the `MW` column, retains only
+`MW < 1000`, and atomically replaces the Parquet file. It is important to run
+this cell after the main Parquet-writing cell; rerunning the earlier writing cell
+alone recreates the pre-MW output.
+
 The workflow contains no random operations. With unchanged files in `sources/`, unchanged notebook code, and the same software versions, it reproduces the same rows, values, ordering, source lists, and CSV output.
 
 The Parquet dataset will have the same logical contents when compatible software versions are used. Its raw bytes or file hash are not guaranteed to remain identical across different pandas or PyArrow versions because serialization metadata and compression encoding can differ.
@@ -55,8 +71,8 @@ The Bradley files under `sources/` are snapshots. Rerunning `data_process.ipynb`
 ## Processing summary
 
 1. The requested SMILES and MP columns are loaded from each source, and integer source labels are assigned.
-2. ChemXplore MP values are parsed from the original `tmp/ºC` field. This preserves negative signs that were lost in some values in `Processed tmp/ºC`. Numeric values with parenthetical uncertainty are retained; censored or approximate entries containing forms such as `<`, `>`, or `≈` are excluded.
-3. Numeric patent MP ranges are represented by their midpoint. Other nonnumeric patent values are excluded.
+2. ChemXplore MP values are parsed from the original `tmp/ºC` field. This preserves negative signs that were lost in some values in `Processed tmp/ºC`. For a numeric value with parenthetical uncertainty, the central numeric value is retained and the parenthetical part is not propagated. Censored or approximate entries containing forms such as `<`, `>`, or `≈` are excluded.
+3. Strict numeric PATENTS MP ranges are represented by their midpoint. For example, `92–93` becomes one processed observation with `MP_reported = 92.5`. Other nonnumeric PATENTS values are excluded. The original text remains available as `MP_raw` in the multiple-MP audit when that observation belongs to an audited group.
 4. SMILES are converted to canonical isomeric SMILES with RDKit. The canonical result must parse successfully a second time.
 5. Broad-organic filtering removes metal-containing and multi-component structures. Halogen-containing compounds are retained.
 6. Duplicate observation rows with the same canonical SMILES, MP, source label, and source file are removed.
@@ -64,8 +80,24 @@ The Bradley files under `sources/` are snapshots. Rerunning `data_process.ipynb`
 8. Groups with a total spread above 10 °C are resolved only when a dominant cluster spans no more than 5 °C, contains at least two source labels, and supports at least two-thirds of the observations.
 9. Unresolved compounds are omitted from `combined_data.parquet` but retained in the multiple-MP audit.
 10. The final consensus MP must be between 0 and 500 °C, inclusive.
+11. RDKit `Descriptors.MolWt` calculates average molecular weight from each saved canonical SMILES. The final Parquet retains only compounds with `MW < 1000` and includes `MW` as a column. This filter is applied after MP consensus and the 0–500 °C consensus filter.
 
 Canonicalization retains specified stereochemistry. It does not perform tautomer standardization, neutralization, salt stripping, or stereoisomer merging.
+
+“Multi-component” means that RDKit `Chem.GetMolFrags` identifies anything
+other than one molecular fragment, commonly represented by a dot in SMILES.
+Metal filtering uses the explicit `METAL_SYMBOLS`/atomic-number set defined in
+the notebook. Halogens are not classified as metals and are retained.
+
+Duplicate detection, exact agreement, spread calculations, medians, and quality
+tiers use the parsed, unrounded numeric MP values. Thus `100` and `100.0`
+are numerically identical, while nearby values are not made identical by
+rounding.
+
+For PATENTS ranges, only the midpoint becomes an MP observation. The range
+endpoints are not used to calculate `MP_mean`, `MP_std`, `MP_mad`,
+`MP_min`, `MP_max`, or `MP_range`. Those statistics are calculated
+afterward from the accepted processed observations for a canonical compound.
 
 ## MP quality tiers
 
@@ -82,7 +114,7 @@ The spread is calculated as the maximum accepted MP minus the minimum accepted M
 
 ## `combined_data.parquet`
 
-This is the broad-organic consensus dataset. It includes the review tier so users can select quality levels without rebuilding the data.
+This is the broad-organic, molecular-weight-filtered consensus dataset. It includes the review tier so users can select quality levels without rebuilding the data. All rows have a consensus MP from 0 to 500 °C, inclusive, and `MW < 1000`.
 
 | Column | Meaning |
 |---|---|
@@ -104,6 +136,7 @@ This is the broad-organic consensus dataset. It includes the review tier so user
 | `N_excluded_values` | Number of observations excluded from the final consensus. |
 | `All_MP_range` | MP spread across all observations before dominant-cluster exclusions. Equal to `MP_range` when no values were excluded. |
 | `ContainsHalogen` | `True` when the canonical structure contains F, Cl, Br, I, At, or Ts. Halogens are retained in this dataset. |
+| `MW` | RDKit average molecular weight from `Descriptors.MolWt`, calculated from the canonical isomeric SMILES. Only values strictly below 1,000 Da are retained. This is not monoisotopic exact mass. |
 
 `Consensus_method` values mean:
 
@@ -111,17 +144,27 @@ This is the broad-organic consensus dataset. It includes the review tier so user
 - `median_all`: every available observation was accepted and the median was used.
 - `dominant_cluster`: the full group spread exceeded 10 °C, but a sufficiently supported cluster spanning no more than 5 °C was accepted.
 
-The current dataset contains 304,683 compounds:
+When more than one candidate dominant cluster exists, candidates are prioritized
+by: (1) the greatest number of distinct source labels, (2) the greatest number
+of observations, and (3) the smallest spread. The selected cluster must still
+contain at least two observations from at least two sources and represent at
+least two-thirds of the complete observation group.
+
+The current saved dataset contains 304,509 compounds after the strict
+`MW < 1000` filter:
 
 | Quality | Compounds |
 |---|---:|
-| `single` | 94,901 |
-| `exact` | 203,958 |
-| `near_exact` | 3,205 |
-| `high_confidence` | 2,220 |
+| `single` | 94,762 |
+| `exact` | 203,925 |
+| `near_exact` | 3,204 |
+| `high_confidence` | 2,219 |
 | `review` | 399 |
 
-There are 124,021 retained halogen-containing compounds.
+The MW filter removed 174 compounds from the 304,683-compound pre-MW consensus
+output. The retained MW range is 18.015–997.694 Da. There are 123,975 retained
+halogen-containing compounds. No separate file containing every MW-excluded
+compound is written.
 
 ## `multiple_MP_compounds.csv`
 
@@ -130,7 +173,7 @@ This is an observation-level audit containing compounds that had more than one d
 | Column | Meaning |
 |---|---|
 | `SMILES` | Canonical isomeric SMILES shared by the conflicting observations. |
-| `MP_reported` | Parsed numeric MP for this observation. ChemXplore signs are corrected, and patent ranges are represented by their midpoint. |
+| `MP_reported` | Parsed numeric MP for this observation. ChemXplore signs are corrected, and PATENTS ranges are represented by their midpoint. |
 | `MP_raw` | Original MP text from the source before parsing. |
 | `Source` | Integer source label for this observation. Unlike the Parquet consensus field, this is one integer per CSV row. |
 | `Source_file` | Input filename from which the observation originated. |
@@ -139,6 +182,11 @@ This is an observation-level audit containing compounds that had more than one d
 | `Consensus_method` | `median_all`, `dominant_cluster`, or `unresolved`. |
 | `Group_MP_range` | Maximum minus minimum MP across the complete group before any values were excluded. |
 
-This audit is generated before the final 0–500 °C consensus filter. Consequently, a resolved group can appear in this CSV without appearing in `combined_data.parquet` if its final consensus MP lies outside the requested range.
+This audit is generated before both the final 0–500 °C consensus filter and the
+final `MW < 1000` filter. Consequently, a resolved group can appear in this
+CSV without appearing in `combined_data.parquet` if its final consensus MP
+lies outside the requested range or its molecular weight is at least 1,000 Da.
+The audit is not a complete log of all MW exclusions because it contains only
+compounds with more than one distinct numeric MP.
 
 The current audit contains 7,507 multiple-MP compounds. Of these, 339 remain unresolved and are excluded from the consensus dataset.
