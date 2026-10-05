@@ -12,9 +12,8 @@ The active combined-data pipeline is:
 ![Conceptual combined melting-point workflow](data_combining_process_diagram.png)
 
 The diagram reflects the consolidated Source 4 input, integrated molecular-
-weight filter, and fresh validated execution using the current input files.
-See the synchronization note under **Reproducing the combined outputs** before
-treating the files already present in `outputs/` as current.
+weight filter, and validated execution using the current input files. The files
+in `outputs/` correspond to this active pipeline.
 
 ## Active organization
 
@@ -125,12 +124,12 @@ The molecular-weight calculation and strict `MW < 1000` filter are part of the
 main pipeline. There is no longer a separate post-processing cell that rewrites
 the Parquet file.
 
-At the time of this README update, the files already present in `outputs/`
-still reflect an earlier Source 4 snapshot (303,897 final compounds). A fresh
-isolated execution with the four inputs currently in `input_datasets/` passed
-all validations and produced 304,508 final compounds. Run the complete
-combination notebook once to synchronize the saved outputs. The result tables
-below report that fresh current-input execution.
+The currently saved outputs were generated from the four active files in
+`input_datasets/` and passed the notebook's validation checks. They contain
+304,508 final compounds; the result tables below describe these files.
+
+Rerunning the complete combination notebook with unchanged inputs and code
+will overwrite the two output files with the same logical result.
 
 The workflow contains no random operations. With unchanged input files,
 notebook code, and software behavior, rerunning it reproduces the same logical
