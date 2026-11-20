@@ -1,0 +1,8 @@
+=== LGB_H ===
+Train compounds: 12,846; validation compounds: 4,282
+Default validation metrics: {'RMSE': 23.122715017642086, 'MAE': 17.687740067248228, 'R2': 0.22683309547275832}
+Best parameters: {'colsample_bytree': 0.7363796353366491, 'learning_rate': 0.022731314142612313, 'max_depth': 12, 'min_child_samples': 50, 'n_estimators': 500, 'num_leaves': 291, 'reg_alpha': 0.7653007582806595, 'reg_lambda': 0.25814379833700807, 'subsample': 0.9811640699533658}
+
+Best Bayesian-search row:
+ Trial  Validation_RMSE                                                                                                                                                                                                                                                             Parameters
+    14        22.677822 {"colsample_bytree": 0.7363796353366491, "learning_rate": 0.022731314142612313, "max_depth": 12, "min_child_samples": 50, "n_estimators": 500, "num_leaves": 291, "reg_alpha": 0.7653007582806595, "reg_lambda": 0.25814379833700807, "subsample": 0.9811640699533658}

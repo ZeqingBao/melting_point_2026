@@ -1,0 +1,31 @@
+{
+  "run_id": "20261120_042119",
+  "split_scheme": "stereo_cleaned",
+  "training_variant": "balanced",
+  "model_type": "LGB",
+  "data_regime": "H",
+  "n_bayes_trials": 20,
+  "train_compounds": 12846,
+  "validation_compounds": 4282,
+  "default_validation_metrics": {
+    "RMSE": 23.122715017642086,
+    "MAE": 17.687740067248228,
+    "R2": 0.22683309547275832
+  },
+  "best_params": {
+    "colsample_bytree": 0.7363796353366491,
+    "learning_rate": 0.022731314142612313,
+    "max_depth": 12,
+    "min_child_samples": 50,
+    "n_estimators": 500,
+    "num_leaves": 291,
+    "reg_alpha": 0.7653007582806595,
+    "reg_lambda": 0.25814379833700807,
+    "subsample": 0.9811640699533658
+  },
+  "best_validation_row": {
+    "Trial": 14,
+    "Validation_RMSE": 22.677822165104075,
+    "Parameters": "{\"colsample_bytree\": 0.7363796353366491, \"learning_rate\": 0.022731314142612313, \"max_depth\": 12, \"min_child_samples\": 50, \"n_estimators\": 500, \"num_leaves\": 291, \"reg_alpha\": 0.7653007582806595, \"reg_lambda\": 0.25814379833700807, \"subsample\": 0.9811640699533658}"
+  }
+}
